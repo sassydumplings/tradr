@@ -1,0 +1,20 @@
+
+%table.table
+  %thead
+    %th Symbol
+    %th Shares
+    %th Average Price
+    %th Current Price
+    %th Current Profit
+  - @means.each do |k, v|
+    %tr
+      - now_price = get_price(k)
+      - now_profit = get_profit(v[:quantity].to_f,v[:mean_price].to_f, now_price.to_f)
+      %td= k
+      %td= v[:quantity]
+      %td= number_to_currency v[:mean_price]
+      %td= number_to_currency now_price
+      - if now_profit > 0
+        %td= content_tag( :span, number_to_currency(now_profit), :class => "profit")
+      - else 
+        %td= content_tag( :span, number_to_currency(now_profit), :class => "loss")

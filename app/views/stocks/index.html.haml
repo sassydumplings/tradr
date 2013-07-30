@@ -1,0 +1,15 @@
+%h1 Stocks#index
+%p Find me in app/views/stocks/index.html.haml
+
+= form_tag "stocks", {:remote => true, :method => :post } do
+  = label_tag "Symbol"
+  = text_field_tag "symbol"
+  %br
+  = label_tag "Quantity"
+  = number_field_tag "quantity"
+  = hidden_field_tag "user_id" , current_user.id
+  %br
+  = button_tag "Add shares"
+#table_div
+  = render 'stock_table'
+
